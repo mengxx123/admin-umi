@@ -51,11 +51,21 @@ class BasicLayout extends React.Component {
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1">
                 <Icon type="user" />
-                <span>nav 1</span>
+                <span>
+                  <Link to='/articles'>文章管理</Link>
+                </span>
               </Menu.Item>
               <Menu.Item key="2">
                 <Icon type="video-camera" />
-                <span>nav 2</span>
+                <span>
+                  <Link to='/products'>商品管理</Link>
+                </span>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Icon type="video-camera" />
+                <span>
+                  <Link to='/shops'>店铺管理</Link>
+                </span>
               </Menu.Item>
               {/* <Menu.Item key="2">
                 <Icon type="video-camera" />

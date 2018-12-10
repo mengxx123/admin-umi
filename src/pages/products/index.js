@@ -1,43 +1,40 @@
 import { connect } from 'dva'
 import { Table } from 'antd'
-import moment from 'moment'
+import {routerRedux, browserHistory} from 'dva/router'
+import qs from 'qs'
 import TableLayout from '_components/TableLayout'
-const MODEL_NAME = 'article'
 import {commonTime} from '_util/filter'
 
+const MODEL_NAME = 'product'
+
 const Index = ({ dispatch, _model }) => {
-  const {dataSource} = _model
+  const {dataSource, pagination} = _model
 
   const columns = [
     {
-      title: '标题',
-      dataIndex: 'title',
+      title: '名称',
+      dataIndex: 'name',
     },
     {
-      title: '内容类型',
-      dataIndex: 'contentType',
+      title: '编号',
+      dataIndex: 'code',
     },
     {
-      title: '置顶',
-      dataIndex: 'top',
+      title: '价格',
+      dataIndex: 'price',
     },
     {
-      title: '标签',
-      dataIndex: 'tags',
-    },
-    {
-      title: '创建者',
-      dataIndex: 'user.name',
+      title: '单位',
+      dataIndex: 'unit',
     },
     {
       title: '创建时间',
       dataIndex: 'createTime',
-      render: commonTime
+      render: commonTime()
     },
     {
       title: '更新时间',
-      dataIndex: 'updateTime',
-      render: commonTime
+      render: commonTime()
     },
   ]
 
@@ -49,12 +46,15 @@ const Index = ({ dispatch, _model }) => {
 
   return (
     <div>
-      <h2>文章列表</h2>
+      <h2>商品列表</h2>
+      
       <TableLayout {...layoutProps} />
     </div>
   );
 };
 
-export default connect(({ [MODEL_NAME]: _model }) => ({
+export default connect(({ [MODEL_NAME]: _model, location, dispatch}) => ({
+  location,
+  dispatch,
   _model,
 }))(Index)

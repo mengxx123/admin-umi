@@ -18,5 +18,7 @@ export default {
   ],
   alias: {
     _util: resolve(__dirname, './src/util'),
+    _models: resolve(__dirname, './src/models'),
+    _components: resolve(__dirname, './src/components'),
   },
 }
