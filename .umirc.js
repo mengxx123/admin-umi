@@ -1,3 +1,4 @@
+import {resolve} from 'path'
 
 // ref: https://umijs.org/config/
 export default {
@@ -15,4 +16,7 @@ export default {
       hardSource: true,
     }],
   ],
+  alias: {
+    _util: resolve(__dirname, './src/util'),
+  },
 }

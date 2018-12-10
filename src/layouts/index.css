@@ -1,15 +1,36 @@
 
-.normal {
-  font-family: Georgia, sans-serif;
-  text-align: center;
+.wrap {
+  height: 100%;
 }
-
+.content {
+  padding: 16px 50px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background-color: #fff;
+}
+.left {
+  display: flex;
+  align-items: center;
+}
+.right {
+  display: flex;
+  align-items: center;
+}
+.layoutWrap {
+  height: 100%;
+}
 .title {
-  font-size: 2.5rem;
-  font-weight: normal;
-  letter-spacing: -1px;
-  background: darkslateblue;
-  padding: .6em 0;
-  color: white;
-  margin: 0;
+  
+}
+.logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.simpleWrap {
+  height: 100%;
 }

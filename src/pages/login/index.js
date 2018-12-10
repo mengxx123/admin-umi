@@ -1,4 +1,5 @@
 import { connect } from 'dva'
+import styles from './index.css'
 
 const Products = ({ dispatch, products }) => {
   function handleDelete(id) {
@@ -8,8 +9,8 @@ const Products = ({ dispatch, products }) => {
     });
   }
   return (
-    <div>
-      <h2>about</h2>
+    <div className={styles.wrap}>
+      <h2>这是登录页面</h2>
     </div>
   );
 };
@@ -17,21 +18,3 @@ const Products = ({ dispatch, products }) => {
 export default connect(({ products }) => ({
   products,
 }))(Products)
-
-// import { Table, Popconfirm, Button, Icon } from 'antd'
-// import styles from './index.css';
-
-// export default function() {
-  
-//   return (
-//     <div className={styles.normal}>
-//       <div className={styles.welcome} />
-//       <ul className={styles.list}>
-//         <Icon type="home" />
-//         <Button type="primary">Primary</Button>
-//         <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
-//         <li><a href="https://umijs.org/guide/getting-started.html">Getting Started</a></li>
-//       </ul>
-//     </div>
-//   );
-// }

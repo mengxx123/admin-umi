@@ -1,6 +1,11 @@
 import { connect } from 'dva'
 import ProductList from '../components/ProductList'
 import { withRouter, Link } from 'dva/router'
+import { Layout, Menu, Breadcrumb } from 'antd'
+
+const {
+  Header, Footer, Sider, Content,
+} = Layout
 
 const Products = ({ dispatch, products }) => {
   function handleDelete(id) {
@@ -12,9 +17,10 @@ const Products = ({ dispatch, products }) => {
   return (
     <div>
       <h2>List of Products</h2>
-      <Link to='/about'>关于</Link>
-      <Link to='/login'>登录</Link>
-      <ProductList onDelete={handleDelete} products={products} />
+          <Link to='/'>首页</Link>
+          <Link to='/login'>登录</Link>
+          <ProductList onDelete={handleDelete} products={products} />
+      
     </div>
   );
 };

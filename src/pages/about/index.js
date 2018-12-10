@@ -1,6 +1,10 @@
 import { connect } from 'dva'
+import { withRouter, Link } from 'dva/router'
 
-const Products = ({ dispatch, products }) => {
+const Products = ({ dispatch, _model }) => {
+  console.log('about', _model)
+  const {tableList} = _model
+
   function handleDelete(id) {
     dispatch({
       type: 'products/delete',
@@ -9,13 +13,14 @@ const Products = ({ dispatch, products }) => {
   }
   return (
     <div>
-      <h2>about</h2>
+      <h2>about {aboutText}</h2>
+      <Link to='/'>首页</Link>
     </div>
   );
 };
 
-export default connect(({ products }) => ({
-  products,
+export default connect(({ about: _model }) => ({
+  _model,
 }))(Products)
 
 // import { Table, Popconfirm, Button, Icon } from 'antd'
