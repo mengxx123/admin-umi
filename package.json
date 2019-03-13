@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "set PORT=8001 && umi dev",
     "build": "umi build",
     "test": "umi test",
-    "lint": "eslint --ext .js src mock tests",
+    "lint": "eslint --ext .js src mock tests"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
