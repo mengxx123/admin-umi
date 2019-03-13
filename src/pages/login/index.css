@@ -1,5 +1,16 @@
-
 .wrap {
-  height: 100%;
-  background-color: #09c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+.form {
+    width: 500px;
+    height: 500px;
+    padding: 32px;
+    background-color: #fff;
+}
+.login {
+    
 }

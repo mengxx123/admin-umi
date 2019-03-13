@@ -1,15 +1,15 @@
 import { connect } from 'dva'
 import { Table } from 'antd'
 
-const MODEL_NAME = 'article'
+const MODEL_NAME = 'user'
 
 const Index = ({ dispatch, _model }) => {
   const {dataSource} = _model
 
   const columns = [
     {
-      title: '标题',
-      dataIndex: 'title',
+      title: '用户名',
+      dataIndex: 'name',
     },
     {
       title: '内容类型',
@@ -39,7 +39,7 @@ const Index = ({ dispatch, _model }) => {
 
   return (
     <div>
-      <h2>文章列表</h2>
+      <h2>用户列表</h2>
       <Table
         dataSource={dataSource}
         columns={columns}
