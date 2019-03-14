@@ -1,16 +1,21 @@
 import { currentPath } from '_util/path'
-import { login } from '../service/auth'
+import storage from '_util/storage'
+import { login } from '_services/auth'
 import modelExtend from 'dva-model-extend'
-import commonModel from './commonModel'
+import commonModel from '_models/commonModel'
+import { message } from 'antd'
+import router from 'umi/router'
 
 export default modelExtend(commonModel, {
+
     namespace: 'login',
+    
     state: {
         dataSource: [],
         aboutText: '这是关于',
         form: {
             account: 'cjh',
-            password: '123456'
+            password: '1234'
         }
     },
     subscriptions: {
@@ -39,13 +44,23 @@ export default modelExtend(commonModel, {
                 },
             })
         },
-        *deleteModel({ location, payload }, { select, put, call }) {
-            console.log('deleteModel', payload)
-            const data = yield call(login, {
+        *login({ location, payload }, { select, put, call }) {
+            const res = yield call(login, {
                 account: payload.account,
                 password: payload.password
             })
-            console.log('返回data', data)
+            console.log('返回 res', res)
+            if (res.status !== 200) {
+                message.error(res.data.msg)
+                return
+            }
+            message.success('登录成功')
+
+            sessionStorage.setItem('isLogin', 'true')
+            storage.set('accessToken', res.data.accessToken)
+            storage.set('user', res.data.user)
+
+            router.push('/')
             // yield put({
             //     type: 'setState',
             //     payload: {

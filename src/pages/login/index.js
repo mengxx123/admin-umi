@@ -23,11 +23,18 @@ class Login extends React.Component {
         const { form } = _model
         console.log('_model33', _model)
 
-        function login() {
-            dispatch({
-                type: `${MODEL_NAME}/deleteModel`,
-                location,
-                payload: form,
+        let login = () => {
+            this.props.form.validateFields((errors) => {
+                if (errors) {
+                  return
+                }
+                let values = this.props.form.getFieldsValue()
+                console.log('测试啊啊啊0', values)
+                dispatch({
+                    type: `${MODEL_NAME}/login`,
+                    location,
+                    payload: values,
+                })
             })
         }
 
@@ -36,7 +43,7 @@ class Login extends React.Component {
                 {/* <h2>这是登录页面</h2> */}
                 <Form className={styles.form} onSubmit={this.handleSubmit}>
                     <Form.Item>
-                        {getFieldDecorator('用户名/邮箱', {
+                        {getFieldDecorator('account', {
                             initialValue: form.account,
                             rules: [{ required: true, message: '请输入用户名/邮箱' }],
                         })(
@@ -44,7 +51,7 @@ class Login extends React.Component {
                         )}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator('密码', {
+                        {getFieldDecorator('password', {
                             initialValue: form.password,
                             rules: [{ required: true, message: 'Please input your Password!' }],
                         })(
@@ -70,4 +77,4 @@ class Login extends React.Component {
 
 export default connect(({ [MODEL_NAME]: _model }) => ({
     _model,
-}))(Form.create({ name: 'normal_login' })(Login))
+}))(Form.create()(Login))

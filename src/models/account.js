@@ -1,16 +1,19 @@
 import { currentPath } from '_util/path'
-import { doit } from '../service/user'
+import { doit } from '../service/account'
 import modelExtend from 'dva-model-extend'
 import commonModel from './commonModel'
 
+const MODEL_NAME = 'account'
+
 export default modelExtend(commonModel, {
-    namespace: 'user',
+
+    namespace: MODEL_NAME,
+    
     state: {
         dataSource: [],
-        aboutText: '这是关于'
     },
     subscriptions: {
-        setup: currentPath('/users', (dispatch, location) => {
+        setup: currentPath('/accounts', (dispatch, location) => {
             dispatch({
                 type: 'init'
             })
@@ -24,14 +27,18 @@ export default modelExtend(commonModel, {
     effects: {
         *init({ location }, { select, put, call }) {
             console.log('进入文章页面')
-            const data = yield call(doit, {
+            const res = yield call(doit, {
                 anum: 1
             })
-            console.log('data', data)
+            console.log('res', res)
+            if (res.status !== 200) {
+                message.error(res.data.msg)
+                return
+            }
             yield put({
                 type: 'setState',
                 payload: {
-                    dataSource: data.data,
+                    dataSource: res.data,
                 },
             })
         },

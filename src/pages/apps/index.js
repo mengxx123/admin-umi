@@ -5,46 +5,32 @@ import Breadcrumb from '_components/Breadcrumb'
 import { commonTime, oneRow } from '_components/tableCeil'
 import router from 'umi/router'
 
-const MODEL_NAME = 'article'
+const MODEL_NAME = 'app'
 
 const Index = ({ dispatch, _model, location }) => {
     const { dataSource } = _model
 
     const columns = [
         {
-            title: '标题',
-            dataIndex: 'title',
+            title: '名称',
+            dataIndex: 'name',
             width: 200,
             // render: oneRow
             render: (text, item) => {
-                return <a onClick={() => router.push(`/articles/${item.id}`)}>{text}</a>
+                return <a onClick={() => router.push(`/apps/${item.id}`)}>{text}</a>
             },
         },
         {
-            title: '内容类型',
-            dataIndex: 'contentType',
+            title: '简介',
+            dataIndex: 'description',
         },
         {
-            title: '置顶',
-            dataIndex: 'top',
-            render: (text, item) => {
-                return <Switch checked={top === 1} />
-            },
+            title: '密钥',
+            dataIndex: 'secretKey',
         },
         {
-            title: '标签',
-            dataIndex: 'tags',
-            render: (text, item) => {
-                console.log('text', text)
-                let tags = item.tags.map(tag => {
-                    return <Tag>{tag}</Tag>
-                })
-                return tags
-            },
-        },
-        {
-            title: '创建者',
-            dataIndex: 'user.name',
+            title: '网站',
+            dataIndex: 'website',
         },
         {
             title: '创建时间',
@@ -67,7 +53,7 @@ const Index = ({ dispatch, _model, location }) => {
     const breadcrumbProps = {
         data: [
             {
-                text: '文章管理',
+                text: '应用管理',
             },
         ]
     }

@@ -1,4 +1,5 @@
-import { request } from '_util/request'
+// import { request } from '_util/request'
+import request from '_util/http'
 
 function login(body) {
     return request({

@@ -1,9 +1,7 @@
 import moment from 'moment'
 
-export function commonTime() {
-    return (text, item) => (
-        <span>
-          { moment(text).format('YYYY-MM-DD HH:mm') }
-        </span>
-      )
+export function commonTime(text, item) {
+    return <span>
+      { moment(text).format('YYYY-MM-DD HH:mm') }
+    </span>
 }

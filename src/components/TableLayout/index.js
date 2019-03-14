@@ -1,80 +1,82 @@
 import { connect } from 'dva'
 import { Table, Button, Input } from 'antd'
-import {routerRedux, browserHistory} from 'dva/router'
+import { routerRedux, browserHistory } from 'dva/router'
 import qs from 'qs'
 import styles from './index.scss'
+import { Breadcrumb } from 'antd'
+import { withRouter, Link } from 'dva/router'
+import { goToFilterURL } from '_util/help'
 
 const Search = Input.Search
 
-function goToFilterURL(dispatch, obj) {
-  console.log('obj', obj)
-  let {pathname, search} = window.location
-  let locationQuery = qs.parse(search.substring(1))
-  console.log('locationQuery', locationQuery)
-  let query = {
-    ...locationQuery,
-    ...obj,
-  }
-  let path = `${pathname}?${qs.stringify(query)}`
-  console.log(path)
-  console.log('routerRedux', routerRedux)
-  routerRedux.push(path)
-  dispatch(routerRedux.push(path));
-}
-
 class Index extends React.Component {
-  render() {
-    const {_model, dispatch, columns} = this.props
 
-    const {dataSource, pagination, keyword} = _model
+    render() {
+        const { _model, location, dispatch, columns } = this.props
 
-    this.index = 0
-    let newColumns = columns.map(item => {
-      return {
-        key: this.index++,
-        ...item
-      }
-    })
+        const { dataSource, _pagination, keyword } = _model
 
-    console.log('newColumns', newColumns)
-    let tableProps = {
-      columns: newColumns,
-      dataSource,
-      pagination: pagination,
-      // scroll: { y: 340 },
-      onChange(page, pageSize) {
-        goToFilterURL(dispatch, {
-          page: page.current
+        this.index = 0
+        let newColumns = columns.map(item => {
+            return {
+                key: this.index++,
+                ...item
+            }
         })
-      }
+
+        function onShowSizeChange(current, pageSize) {
+            console.log(current, pageSize);
+        }
+
+        console.log('newColumns', location)
+        let tableProps = {
+            columns: newColumns,
+            dataSource,
+            pagination: {
+                current: (location.query && location.query.page) ? parseInt(location.query.page) : 1,
+                total: _pagination ? _pagination.total : 10
+            },
+            showTotal: total => `Total ${total} items`,
+            showSizeChanger: true,
+            onShowSizeChange: onShowSizeChange,
+            // scroll: { y: 560 },
+            onChange(page, pageSize) {
+                console.log('change', page)
+                goToFilterURL({
+                    page: page.current
+                })
+            },
+            rowKey: 'id',
+        }
+
+        function onCreate() {
+
+        }
+
+        function onChange(e) {
+            console.log('change', e)
+        }
+
+        function onSearch(value) {
+            goToFilterURL(dispatch, {
+                keyword: value
+            })
+        }
+
+        return (
+            <div>
+                <div className={styles.action}>
+                    <Button type="primary" onClick={e => onCreate()}>新增</Button>
+                    <Search defaultValue={keyword} className={styles.search} placeholder="搜索"
+                        onChange={e => onChange(e)}
+                        onSearch={value => onSearch(value)} />
+                </div>
+                <div className={styles['table-box']}>
+                    <Table {...tableProps} />
+                </div>
+            </div>
+        )
     }
-
-    function onCreate() {
-
-    }
-
-    function onChange(e) {
-      console.log('change', e)
-    }
-
-    function onSearch(value) {
-      goToFilterURL(dispatch, {
-        keyword: value
-      })
-    }
-
-    return (
-      <div>
-        <div className={styles.action}>
-          <Button type="primary" onClick={e => onCreate()}>新增</Button>
-          <Search defaultValue={keyword} className={styles.search} placeholder="搜索" 
-            onChange={e => onChange(e)}
-            onSearch={value => onSearch(value)} />
-        </div>
-        <Table {...tableProps} />
-      </div>
-    )
-  }
 }
 
 export default Index

@@ -1,39 +1,57 @@
 import { connect } from 'dva'
 import ProductList from '../components/ProductList'
 import { withRouter, Link } from 'dva/router'
-import { Layout, Menu, Breadcrumb } from 'antd'
-
+import { Layout, Menu, Breadcrumb, Row, Col, Card  } from 'antd'
 const {
-  Header, Footer, Sider, Content,
+    Header, Footer, Sider, Content,
 } = Layout
 
 const Products = ({ dispatch, products }) => {
-  function handleDelete(id) {
-    dispatch({
-      type: 'products/delete',
-      payload: id,
-    });
-  }
-  return (
-    <div>
-      <h2>List of Products</h2>
-          <Link to='/'>首页</Link>
-          <Link to='/login'>登录</Link>
-          <ProductList onDelete={handleDelete} products={products} />
-      
-    </div>
-  );
+    function handleDelete(id) {
+        dispatch({
+            type: 'products/delete',
+            payload: id,
+        });
+    }
+    return (
+        <div>
+            <Row className="admin-row" gutter={16}>
+                <Col span={12}>
+                    <Card title="卡片标题">卡片内容</Card>
+                </Col>
+                <Col span={12}>
+                    <Card title="卡片标题">卡片内容</Card>
+                </Col>
+            </Row>
+            <Row gutter={16}>
+                <Col span={8}>
+                    <Card title="卡片标题">卡片内容</Card>
+                </Col>
+                <Col span={8}>
+                    <Card title="卡片标题">卡片内容</Card>
+                </Col>
+                <Col span={8}>
+                    <Card title="卡片标题">卡片内容</Card>
+                </Col>
+            </Row>
+            <h2>List of Products</h2>
+            <Link to='/'>首页</Link>
+            <Link to='/login'>登录</Link>
+            <ProductList onDelete={handleDelete} products={products} />
+
+        </div>
+    );
 };
 
 export default connect(({ products }) => ({
-  products,
+    products,
 }))(Products)
 
 // import { Table, Popconfirm, Button, Icon } from 'antd'
 // import styles from './index.css';
 
 // export default function() {
-  
+
 //   return (
 //     <div className={styles.normal}>
 //       <div className={styles.welcome} />

@@ -5,11 +5,11 @@ export default {
     effects: {
     },
     reducers: {
-      setState(state, action) {
-        return {...state, ...action.payload}
-      },
-      fetch (state, action) {
-        return {...state, ...action.payload}
-      },
+        setState(state, action) {
+            return { ...state, ...action.payload }
+        },
+        fetch(state, action) {
+            return { ...state, ...action.payload }
+        },
     },
 }

@@ -1,13 +1,15 @@
 import { request } from '_util/request'
+import http from '_util/http'
 
-function doit(body) {
-    return request({
+function getList(params) {
+    return http({
         method: 'get',
-        url: `https://nodeapi.yunser.com/users?page_size=20&page=1`,
-        data: JSON.stringify(body),
+        url: `https://nodeapi.yunser.com/users`,
+        // data: JSON.stringify(body),
+        params
     })
 }
 
 module.exports = {
-    doit,
+    getList,
 }

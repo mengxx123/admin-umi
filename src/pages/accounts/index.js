@@ -1,24 +1,19 @@
 import { connect } from 'dva'
-import { Switch, Tag } from 'antd'
+import { Table } from 'antd'
+import moment from 'moment'
 import TableLayout from '_components/TableLayout'
 import Breadcrumb from '_components/Breadcrumb'
-import { commonTime, oneRow } from '_components/tableCeil'
-import router from 'umi/router'
+import { commonTime } from '_util/filter'
 
-const MODEL_NAME = 'article'
+const MODEL_NAME = 'account'
 
-const Index = ({ dispatch, _model, location }) => {
+const Index = ({ dispatch, _model }) => {
     const { dataSource } = _model
 
     const columns = [
         {
             title: '标题',
             dataIndex: 'title',
-            width: 200,
-            // render: oneRow
-            render: (text, item) => {
-                return <a onClick={() => router.push(`/articles/${item.id}`)}>{text}</a>
-            },
         },
         {
             title: '内容类型',
@@ -27,20 +22,10 @@ const Index = ({ dispatch, _model, location }) => {
         {
             title: '置顶',
             dataIndex: 'top',
-            render: (text, item) => {
-                return <Switch checked={top === 1} />
-            },
         },
         {
             title: '标签',
             dataIndex: 'tags',
-            render: (text, item) => {
-                console.log('text', text)
-                let tags = item.tags.map(tag => {
-                    return <Tag>{tag}</Tag>
-                })
-                return tags
-            },
         },
         {
             title: '创建者',
@@ -61,14 +46,18 @@ const Index = ({ dispatch, _model, location }) => {
     const layoutProps = {
         _model,
         dispatch,
-        location,
         columns
     }
     const breadcrumbProps = {
         data: [
             {
-                text: '文章管理',
+                text: '123',
+                url: ''
             },
+            {
+                text: '123',
+                url: ''
+            }
         ]
     }
 
