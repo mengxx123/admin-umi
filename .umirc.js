@@ -21,6 +21,7 @@ export default {
         _models: resolve(__dirname, './src/models'),
         _services: resolve(__dirname, './src/service'),
         _components: resolve(__dirname, './src/components'),
+        _config: resolve(__dirname, './src/config'),
     },
     // proxy: {
     // 	'/api': {

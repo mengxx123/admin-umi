@@ -1,10 +1,11 @@
 // import {request} from '_util/request'
 import request from '_util/http'
+import config from '_config'
 
 function getList(params) {
     return request({
         method: 'get',
-        url: `https://nodeapi.yunser.com/apps`,
+        url: `/apps`,
         params
     })
 }
