@@ -4,9 +4,12 @@ import { goToFilterURL } from '_util/help'
 import router from 'umi/router'
 import Breadcrumb from '_components/Breadcrumb'
 const MODEL_NAME = 'user'
+import TableLayout from '_components/TableLayout'
 
 const Index = ({ dispatch, _model }) => {
     const { dataSource } = _model
+
+    console.log('用户数据', _model)
 
     const columns = [
         {
@@ -34,6 +37,13 @@ const Index = ({ dispatch, _model }) => {
         },
     ]
 
+    const layoutProps = {
+        _model,
+        dispatch,
+        location,
+        columns
+    }
+
     const tableProps = {
         pagination: {
             defaultCurrent: 2,
@@ -57,11 +67,7 @@ const Index = ({ dispatch, _model }) => {
     return (
         <div>
             <Breadcrumb {...breadcrumbProps} />
-            <Table 
-                dataSource={dataSource}
-                columns={columns}
-                {...tableProps}
-            />
+            <TableLayout {...layoutProps} />
         </div>
     );
 };

@@ -1,8 +1,14 @@
-
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
+}
+
+.admin-row {
+    margin-bottom: 16px;
 }

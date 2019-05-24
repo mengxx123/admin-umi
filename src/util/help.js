@@ -17,8 +17,8 @@ export const goToFilterURL = (value, IsResetPagination = false) => {
 export const getGoToFilterURL = (value, IsResetPagination = false) => {
     let { pathname, search } = window.location;
     let locationQuery = qs.parse(search.substring(1))
-    console.log('value', value)
-    console.log('locationQuery', locationQuery)
+    console.log('===value', value)
+    console.log('===locationQuery', locationQuery)
     let query = {
         ...locationQuery,
         ...value,

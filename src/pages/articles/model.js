@@ -2,6 +2,7 @@ import { currentPath } from '_util/path'
 import { doit, getDetail } from '_services/article'
 import modelExtend from 'dva-model-extend'
 import commonModel from '_models/commonModel'
+import { defaultPageSize } from '_util/page'
 
 const MODEL_NAME = 'article'
 const PATH = '/articles'
@@ -28,8 +29,8 @@ export default modelExtend(commonModel, {
         *init({ location }, { select, put, call }) {
             console.log('进入文章页面', location)
             const res = yield call(doit, {
-                page: location.query.page || '1',
-                page_size: location.query.pageSize || '10'
+                page: location.query.page || 1,
+                page_size: location.query.pageSize || defaultPageSize
             })
             console.log('res', res)
 

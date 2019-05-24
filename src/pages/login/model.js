@@ -9,12 +9,12 @@ import router from 'umi/router'
 export default modelExtend(commonModel, {
 
     namespace: 'login',
-    
+
     state: {
         dataSource: [],
         aboutText: '这是关于',
         form: {
-            account: 'cjh',
+            account: '1418503647@qq.com',
             password: '1234'
         }
     },

@@ -1,5 +1,5 @@
 import { connect } from 'dva'
-import ProductList from '../components/ProductList'
+import AdminRow from '../components/AdminRow'
 import { withRouter, Link } from 'dva/router'
 import { Layout, Menu, Breadcrumb, Row, Col, Card  } from 'antd'
 const {
@@ -15,15 +15,15 @@ const Products = ({ dispatch, products }) => {
     }
     return (
         <div>
-            <Row className="admin-row" gutter={16}>
+            <AdminRow>
                 <Col span={12}>
                     <Card title="卡片标题">卡片内容</Card>
                 </Col>
                 <Col span={12}>
                     <Card title="卡片标题">卡片内容</Card>
                 </Col>
-            </Row>
-            <Row gutter={16}>
+            </AdminRow>
+            <AdminRow>
                 <Col span={8}>
                     <Card title="卡片标题">卡片内容</Card>
                 </Col>
@@ -33,34 +33,11 @@ const Products = ({ dispatch, products }) => {
                 <Col span={8}>
                     <Card title="卡片标题">卡片内容</Card>
                 </Col>
-            </Row>
-            <h2>List of Products</h2>
-            <Link to='/'>首页</Link>
-            <Link to='/login'>登录</Link>
-            <ProductList onDelete={handleDelete} products={products} />
-
+            </AdminRow>
         </div>
-    );
-};
+    )
+}
 
 export default connect(({ products }) => ({
     products,
 }))(Products)
-
-// import { Table, Popconfirm, Button, Icon } from 'antd'
-// import styles from './index.css';
-
-// export default function() {
-
-//   return (
-//     <div className={styles.normal}>
-//       <div className={styles.welcome} />
-//       <ul className={styles.list}>
-//         <Icon type="home" />
-//         <Button type="primary">Primary</Button>
-//         <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
-//         <li><a href="https://umijs.org/guide/getting-started.html">Getting Started</a></li>
-//       </ul>
-//     </div>
-//   );
-// }

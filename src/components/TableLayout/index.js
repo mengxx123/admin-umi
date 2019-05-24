@@ -1,5 +1,6 @@
 import { connect } from 'dva'
-import { Table, Button, Input } from 'antd'
+import { Table, Button, Input, LocaleProvider } from 'antd'
+
 import { routerRedux, browserHistory } from 'dva/router'
 import qs from 'qs'
 import styles from './index.scss'
@@ -14,7 +15,8 @@ class Index extends React.Component {
     render() {
         const { _model, location, dispatch, columns } = this.props
 
-        const { dataSource, _pagination, keyword } = _model
+        const { dataSource, _pagination } = _model
+        const { keyword = '' } = window.__locationQuery
 
         this.index = 0
         let newColumns = columns.map(item => {
@@ -28,24 +30,27 @@ class Index extends React.Component {
             console.log(current, pageSize);
         }
 
-        console.log('newColumns', location)
+        console.log('window.__locationQuery', window.__locationQuery)
         let tableProps = {
             columns: newColumns,
             dataSource,
             pagination: {
-                current: (location.query && location.query.page) ? parseInt(location.query.page) : 1,
-                total: _pagination ? _pagination.total : 10
+                current: (window.__locationQuery && window.__locationQuery.page) ? parseInt(window.__locationQuery.page) : 1,
+                total: _pagination ? _pagination.total : 10,
+                showSizeChanger: true,
+                onShowSizeChange: onShowSizeChange,
+                onChange(page, pageSize) {
+                    console.log('change', page, pageSize)
+                    goToFilterURL({
+                        page: page,
+                        pageSize: pageSize
+                    })
+                },
             },
-            showTotal: total => `Total ${total} items`,
-            showSizeChanger: true,
-            onShowSizeChange: onShowSizeChange,
+            // showTotal: total => `Total ${total} items`,
+            // showSizeChanger: true,
+            // onShowSizeChange: onShowSizeChange,
             // scroll: { y: 560 },
-            onChange(page, pageSize) {
-                console.log('change', page)
-                goToFilterURL({
-                    page: page.current
-                })
-            },
             rowKey: 'id',
         }
 
@@ -58,11 +63,21 @@ class Index extends React.Component {
         }
 
         function onSearch(value) {
-            goToFilterURL(dispatch, {
+            console.log('搜索')
+            goToFilterURL({
                 keyword: value
             })
         }
 
+        let noPermission = true
+        if (noPermission) {
+            return (
+                <div className={styles.noPermission}>
+                    没有权限
+                </div>
+            )
+        }
+        
         return (
             <div>
                 <div className={styles.action}>

@@ -4,7 +4,7 @@ import http from '_util/http'
 function getList(params) {
     return http({
         method: 'get',
-        url: `https://nodeapi.yunser.com/users`,
+        url: `/apps/1/users`,
         // data: JSON.stringify(body),
         params
     })

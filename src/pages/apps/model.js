@@ -2,6 +2,7 @@ import { currentPath } from '_util/path'
 import { getList, getDetail } from './service'
 import modelExtend from 'dva-model-extend'
 import commonModel from '_models/commonModel'
+import { defaultPageSize } from '_util/page'
 
 const MODEL_NAME = 'app'
 const PATH = '/apps'
@@ -29,7 +30,7 @@ export default modelExtend(commonModel, {
             console.log('进入文章页面', location)
             const res = yield call(getList, {
                 page: location.query.page || '1',
-                page_size: location.query.pageSize || '10'
+                page_size: location.query.pageSize || defaultPageSize
             })
             console.log('res', res)
 

@@ -1,19 +1,22 @@
 import { currentPath } from '_util/path'
+import { defaultPageSize } from '_util/page'
 import { getList } from '_services/user'
 import modelExtend from 'dva-model-extend'
 import commonModel from '_models/commonModel'
 
+const NS_USER = 'user'
+
 export default modelExtend(commonModel, {
-    namespace: 'user',
+    namespace: NS_USER,
+
     state: {
         dataSource: [],
-        aboutText: '这是关于'
     },
     subscriptions: {
         setup: currentPath('/users', (dispatch, location) => {
             console.log('location', location)
             dispatch({
-                type: 'init'
+                type: 'init',
             })
         })
     },
@@ -23,18 +26,20 @@ export default modelExtend(commonModel, {
         },
     },
     effects: {
-        *init({ location }, { select, put, call }) {
-            console.log('进入用户页面', location)
-
+        *init({}, { select, put, call }) {
+            console.log('===defaultPageSize', defaultPageSize)
             const data = yield call(getList, {
-                page: 1,
-                page_size: 10
+                page: window.__locationQuery.page || 1,
+                page_size: window.__locationQuery.pageSize || defaultPageSize
             })
-            console.log('data', data)
+            console.log('data222', data)
             yield put({
                 type: 'setState',
                 payload: {
                     dataSource: data.data,
+                    _pagination: {
+                        total: data.headers['x-total'] ? parseInt(data.headers['x-total']) : 0
+                    }
                 },
             })
         },
