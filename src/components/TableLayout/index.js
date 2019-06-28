@@ -70,14 +70,14 @@ class Index extends React.Component {
         }
 
         let noPermission = true
-        if (noPermission) {
-            return (
-                <div className={styles.noPermission}>
-                    没有权限
-                </div>
-            )
-        }
-        
+        // if (noPermission) {
+        //     return (
+        //         <div className={styles.noPermission}>
+        //             没有权限
+        //         </div>
+        //     )
+        // }
+
         return (
             <div>
                 <div className={styles.action}>
